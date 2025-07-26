@@ -5,7 +5,7 @@ Esta aplicação é uma calculadora de impostos desenhada especificamente para t
 A calculadora foca-se no impacto de um **serviço único**, estimando o valor líquido que o trabalhador irá receber após deduzir a Segurança Social e o IRS.
 
 <!-- Placeholder para a screenshot da aplicação -->
-![Screenshot da Aplicação](App_Screenshot.webp)
+![Screenshot da Aplicação](App_Screenshot-small.webp)
 
 ## ✨ Funcionalidades
 
