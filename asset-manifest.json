@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/calculadora_de_impostos/static/css/main.a62a7b77.css",
-    "main.js": "/calculadora_de_impostos/static/js/main.47dfcbc7.js",
+    "main.js": "/calculadora_de_impostos/static/js/main.5747e3f7.js",
     "static/js/453.33f37caa.chunk.js": "/calculadora_de_impostos/static/js/453.33f37caa.chunk.js",
     "index.html": "/calculadora_de_impostos/index.html",
     "main.a62a7b77.css.map": "/calculadora_de_impostos/static/css/main.a62a7b77.css.map",
-    "main.47dfcbc7.js.map": "/calculadora_de_impostos/static/js/main.47dfcbc7.js.map",
+    "main.5747e3f7.js.map": "/calculadora_de_impostos/static/js/main.5747e3f7.js.map",
     "453.33f37caa.chunk.js.map": "/calculadora_de_impostos/static/js/453.33f37caa.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.a62a7b77.css",
-    "static/js/main.47dfcbc7.js"
+    "static/js/main.5747e3f7.js"
   ]
 }
