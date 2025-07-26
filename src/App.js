@@ -115,7 +115,7 @@ function App() {
             {results && (
                 <div ref={resultsRef} className="results show" id="results">
                     <div className="profit-summary">
-                        <h2>💸 Lucro Líquido</h2>
+                        <h2>Lucro Líquido</h2>
                         <div className="profit-value">{formatCurrency(results.netProfit)}</div>
                         <div className="profit-subtitle">É isto que vai realmente ganhar</div>
                     </div>
