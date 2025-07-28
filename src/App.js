@@ -108,7 +108,7 @@ function App() {
                         <label htmlFor="withholding">Cliente faz retenção na fonte (25%)</label>
                     </div>
 
-                    <button type="submit" className="btn-calculate">🚀 Calcular Lucro Real</button>
+                    <button type="submit" className="btn-calculate">Calcular Lucro Real</button>
                 </form>
             </div>
 
