@@ -36,6 +36,12 @@ function App() {
         const irsResult = calculateIRSImpact(serviceNum, revenueNum);
         const withholdingAmount = hasWithholding ? serviceNum * 0.25 : 0;
 
+        // New calculations
+        const ssReduced = ssResult.impact * 0.75; // (-25% SS)
+        const profitPreContribution = serviceNum - ssReduced; // Profit pre contribution
+        const contributionValue = profitPreContribution * 0.1; // Contribution value
+        const profitPostContribution = profitPreContribution - contributionValue; // Profit post contribution
+
         const totalDeductions = ssResult.impact + irsResult.impact + withholdingAmount;
         const netProfit = serviceNum - totalDeductions;
 
@@ -48,6 +54,10 @@ function App() {
             withholdingAmount,
             netProfit,
             profitPercentage: netProfit / serviceNum,
+            ssReduced,
+            profitPreContribution,
+            contributionValue,
+            profitPostContribution,
         });
     };
 
@@ -150,6 +160,38 @@ function App() {
                         <strong>💡 Resumo:</strong> De cada {formatCurrency(results.serviceAmount)} que facturar,
                         ficará com {formatCurrency(results.netProfit)} líquidos
                         ({formatPercentage(results.profitPercentage)} do valor original)
+                    </div>
+
+                    <div className="breakdown-card">
+                        <h3 style={{ marginBottom: '1rem', color: '#2c3e50' }}>📊 Cálculos Adicionais</h3>
+                        <div className="breakdown-item">
+                            <span>🏛️ Segurança Social (-25% SS)</span>
+                            <span className="value-negative">{formatCurrency(results.ssReduced)}</span>
+                        </div>
+                        <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '1rem' }}>
+                            Valor da SS com desconto de 25% (SS × 0.75)
+                        </div>
+                        <div className="breakdown-item">
+                            <span>📈 Lucro Pré Contribuição</span>
+                            <span className="value-positive">{formatCurrency(results.profitPreContribution)}</span>
+                        </div>
+                        <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '1rem' }}>
+                            Valor bruto - SS reduzida
+                        </div>
+                        <div className="breakdown-item">
+                            <span>� Valor de Contribuição</span>
+                            <span className="value-negative">{formatCurrency(results.contributionValue)}</span>
+                        </div>
+                        <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '1rem' }}>
+                            (Valor bruto - SS reduzida) × 10%
+                        </div>
+                        <div className="breakdown-item total">
+                            <span>💰 Lucro Pós Contribuição</span>
+                            <span className="value-positive">{formatCurrency(results.profitPostContribution)}</span>
+                        </div>
+                        <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '1rem' }}>
+                            Valor bruto - SS reduzida - Valor de contribuição
+                        </div>
                     </div>
 
                     <div className="breakdown-card">
