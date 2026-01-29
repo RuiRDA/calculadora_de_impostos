@@ -172,25 +172,25 @@ function App() {
                             Valor da SS com desconto de 25% (SS × 0.75)
                         </div>
                         <div className="breakdown-item">
-                            <span>📈 Lucro Pré Contribuição</span>
+                            <span>📈 Lucro Pré Dízimo</span>
                             <span className="value-positive">{formatCurrency(results.profitPreContribution)}</span>
                         </div>
                         <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '1rem' }}>
                             Valor bruto - SS reduzida
                         </div>
                         <div className="breakdown-item">
-                            <span>� Valor de Contribuição</span>
+                            <span>💼 Valor do Dízimo</span>
                             <span className="value-negative">{formatCurrency(results.contributionValue)}</span>
                         </div>
                         <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '1rem' }}>
                             (Valor bruto - SS reduzida) × 10%
                         </div>
                         <div className="breakdown-item total">
-                            <span>💰 Lucro Pós Contribuição</span>
+                            <span>💰 Lucro Pós Dízimo</span>
                             <span className="value-positive">{formatCurrency(results.profitPostContribution)}</span>
                         </div>
                         <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '1rem' }}>
-                            Valor bruto - SS reduzida - Valor de contribuição
+                            Valor bruto - SS reduzida - Valor do dízimo
                         </div>
                     </div>
 
