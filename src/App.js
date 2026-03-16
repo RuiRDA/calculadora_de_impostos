@@ -12,6 +12,7 @@ function App() {
     const [annualRevenue, setAnnualRevenue] = useState('');
     const [isFirstYear, setIsFirstYear] = useState(false);
     const [hasWithholding, setHasWithholding] = useState(false);
+    const [monthlyExpenses, setMonthlyExpenses] = useState('');
     const [results, setResults] = useState(null);
     const resultsRef = useRef(null);
 
@@ -42,7 +43,7 @@ function App() {
         const contributionValue = profitPreContribution * 0.1; // Contribution value
         const profitPostContribution = profitPreContribution - contributionValue; // Profit post contribution
 
-        const totalDeductions = ssResult.impact + irsResult.impact + withholdingAmount;
+        const totalDeductions = ssReduced + irsResult.impact + withholdingAmount;
         const netProfit = serviceNum - totalDeductions;
 
         setResults({
@@ -60,6 +61,11 @@ function App() {
             profitPostContribution,
         });
     };
+
+    const expensesNum = parseFloat(monthlyExpenses) || 0;
+    const profitAfterExpenses = results ? results.netProfit - expensesNum : 0;
+    const dizimoAfterExpenses = Math.max(0, profitAfterExpenses * 0.1);
+    const finalProfit = profitAfterExpenses - dizimoAfterExpenses;
 
     return (
         <div className="container">
@@ -137,8 +143,11 @@ function App() {
                             <span className="value-positive">{formatCurrency(results.serviceAmount)}</span>
                         </div>
                         <div className="breakdown-item">
-                            <span>🏛️ Segurança Social</span>
-                            <span className="value-negative">-{formatCurrency(results.ssImpact)}</span>
+                            <span>🏛️ Segurança Social (-25%)</span>
+                            <span className="value-negative">-{formatCurrency(results.ssReduced)}</span>
+                        </div>
+                        <div style={{ fontSize: '0.8rem', color: '#666', textAlign: 'right', marginTop: '-0.5rem', marginBottom: '0.5rem' }}>
+                            (Valor total 100%: {formatCurrency(results.ssImpact)})
                         </div>
                         <div className="breakdown-item">
                             <span>📊 IRS</span>
@@ -153,6 +162,31 @@ function App() {
                         <div className="breakdown-item total">
                             <span>💰 LUCRO LÍQUIDO</span>
                             <span className="value-positive">{formatCurrency(results.netProfit)}</span>
+                        </div>
+
+                        <div style={{ marginTop: '1.5rem', paddingTop: '1.5rem', borderTop: '1px dashed #eee' }}>
+                            <div className="input-group">
+                                <label htmlFor="monthlyExpenses">🏠 Despesas Mensais (€)</label>
+                                <input
+                                    type="number"
+                                    id="monthlyExpenses"
+                                    min="0"
+                                    step="0.01"
+                                    placeholder="Ex: 200"
+                                    value={monthlyExpenses}
+                                    onChange={(e) => setMonthlyExpenses(e.target.value)}
+                                    style={{ width: '100%', padding: '8px', borderRadius: '4px', border: '1px solid #ddd' }}
+                                />
+                            </div>
+
+                            <div className="breakdown-item">
+                                <span>⛪ Dízimo (10% do líquido pós despesas)</span>
+                                <span className="value-negative">-{formatCurrency(dizimoAfterExpenses)}</span>
+                            </div>
+                            <div className="breakdown-item total" style={{ color: '#27ae60' }}>
+                                <span>🎯 LUCRO FINAL (Pós Dízimo)</span>
+                                <span className="value-positive">{formatCurrency(finalProfit)}</span>
+                            </div>
                         </div>
                     </div>
 
@@ -169,7 +203,7 @@ function App() {
                             <span className="value-negative">{formatCurrency(results.ssReduced)}</span>
                         </div>
                         <div style={{ fontSize: '0.9rem', color: '#666', marginBottom: '1rem' }}>
-                            Valor da SS com desconto de 25% (SS × 0.75)
+                            Valor da SS com desconto de 25% (SS × 0.75). Valor total 100%: {formatCurrency(results.ssImpact)}
                         </div>
                         <div className="breakdown-item">
                             <span>📈 Lucro Pré Dízimo</span>
